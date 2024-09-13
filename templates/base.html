@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{% block title %}компиютер магазин{% endblock %}</title>
+</head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.content {
+    padding: 20px;
+}
+
+footer {
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product-item {
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+}
+
+.product-detail img {
+    width: 300px;
+    height: auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+</style>
+
+
+<header>
+    <nav>
+        <a href="{% url 'menge_list' %}">Home</a>
+        {% if user.is_authenticated %}
+            <span>Welcome, {{ user.username }}!</span>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </nav>
+</header>
+
+<body>
+    <header>
+        <h1>компютер магазин</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'product_list' %}">товары</a></li>
+                <li><a href="{% url 'order_list' %}">заказы</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        {% block content %}
+        <!-- Sahifa kontenti bu yerda yuklanadi -->
+        {% endblock %}
+    </div>z
+</body>
+</html>

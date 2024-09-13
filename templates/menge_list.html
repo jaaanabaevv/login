@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menge List</title>
+</head>
+<body>
+    <h1>Menge List</h1>
+
+    <ul>
+        {% for menge in menge_list %}
+            <li>
+                <a href="{% url 'menge_detail' menge.id %}">
+                    {{ menge.title }}
+                </a>
+                <p>{{ menge.description|truncatewords:20 }}</p>
+                <small>Created at: {{ menge.created_at }}</small>
+            </li>
+        {% empty %}
+            <li>No menge available</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

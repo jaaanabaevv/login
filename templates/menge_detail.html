@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ menge.title }}</title>
+</head>
+<body>
+    <h1>{{ menge.title }}</h1>
+    <p>{{ menge.description }}</p>
+    <small>Created at: {{ menge.created_at }}</small>
+    <hr>
+
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <strong>{{ comment.author.username }}</strong>:
+                <p>{{ comment.content }}</p>
+                <small>Posted on: {{ comment.created_at }}</small>
+            </li>
+        {% empty %}
+            <li>No comments yet. Be the first to comment!</li>
+        {% endfor %}
+    </ul>
+    <hr>
+
+    <h3>Leave a Comment</h3>
+    {% if user.is_authenticated %}
+        <form action="{% url 'menge_detail' menge.id %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Comment</button>
+        </form>
+    {% else %}
+        <p>You must be <a href="{% url 'login' %}">logged in</a> to leave a comment.</p>
+    {% endif %}
+
+    <p><a href="{% url 'menge_list' %}">Back to Menge List</a></p>
+
+
+
+
+    <!-- Comments Section -->
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <strong>{{ comment.author.username }}</strong>:
+                <p>{{ comment.content }}</p>
+                <small>Posted on: {{ comment.created_at }}</small>
+            </li>
+        {% empty %}
+            <li>No comments yet. Be the first to comment!</li>
+        {% endfor %}
+    </ul>
+    <hr>
+
+    <!-- Add Comment Form -->
+    <h3>Add a Comment</h3>
+    {% if user.is_authenticated %}
+        <form action="{% url 'menge_detail' menge.id %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Comment</button>
+        </form>
+    {% else %}
+        <p>You must be <a href="{% url 'login' %}">logged in</a> to leave a comment.</p>
+    {% endif %}
+
+    <p><a href="{% url 'menge_list' %}">Back to Menge List</a></p>
+</body>
+</html>
