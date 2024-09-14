@@ -3,39 +3,101 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block content %}
+<style>
+    /* Asosiy uslublar */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.content {
+    padding: 20px;
+}
+
+footer {
+    text-align: center;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product-item {
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+}
+
+.product-detail img {
+    width: 300px;
+    height: auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+</style>
 <div class="product-detail">
     <img src="{{ product.image.url }}" alt="{{ product.name }}">
-    <h2>{{ product.name }}</h2>
+    <h2 style="color: black;">{{ product.name }}</h2>
     <p>{{ product.description }}</p>
     <p>цена: ${{ product.price }}</p>
 
     <a href="{% url 'add_to_cart' product.id %}" class="btn">корзина</a>
 </div>
-   <!-- Comments Section -->
-   <h2>Comments</h2>
-   <ul>
-       {% for comment in comments %}
-           <li>
-               <strong>{{ comment.author.username }}</strong>:
-               <p>{{ comment.content }}</p>
-               <small>Posted on: {{ comment.created_at }}</small>
-           </li>
-       {% empty %}
-           <li>No comments yet. Be the first to comment!</li>
-       {% endfor %}
-   </ul>
-   <hr>
 
    <!-- Add Comment Form -->
-   <h3>Add a Comment</h3>
-   {% if user.is_authenticated %}
-       <form action="{% url 'product_detail' product.id %}" method="POST">
-           {% csrf_token %}
-           {{ form.as_p }}
-           <button type="submit">Submit Comment</button>
-       </form>
-   {% else %}
-       <p>You must be <a href="{% url 'login' %}">logged in</a> to leave a comment.</p>
-   {% endif %}
-   <p><a href="{% url 'menge_list' %}">Back to Menge List</a></p>
+
+    <!-- Comments Section -->
+
 {% endblock %}
+

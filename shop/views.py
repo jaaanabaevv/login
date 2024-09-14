@@ -15,7 +15,15 @@ from django.contrib import messages
 
 # Barcha mahsulotlarni ko'rsatish
 def product_list(request):
-    products = Product.objects.all()  # Barcha mahsulotlarni olib kelish
+    # URL'dan kategoriya ID'sini olish
+    category_id = request.GET.get('category')
+    if category_id:
+        # Agar kategoriya tanlangan bo'lsa, mahsulotlarni shu kategoriya bo'yicha filtrlash
+        products = Product.objects.filter(category_id=category_id)
+    else:
+        # Aks holda barcha mahsulotlarni ko'rsatish
+        products = Product.objects.all()
+    
     categories = Category.objects.all()  # Barcha kategoriyalarni olib kelish
     return render(request, 'product_list.html', {'products': products, 'categories': categories})
 

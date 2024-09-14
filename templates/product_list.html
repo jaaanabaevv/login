@@ -9,8 +9,8 @@
     <div class="product-item">
         <a href="{% url 'product_detail' product.id %}">
             <img src="{{ product.image.url }}" alt="{{ product.name }}">
-            <h3>{{ product.name }}</h3>
-            <p>цена: ${{ product.price }}</p>
+            <h3 style="color: black;">{{ product.name }}</h3>
+            <p style="color: black;">цена: ${{ product.price }}</p>
         </a>
     </div>
     {% endfor %}

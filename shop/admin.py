@@ -8,7 +8,6 @@ admin.site.register(Comment)
 
 
 
-
 @admin.register(Product)
 class ProductClass(admin.ModelAdmin):
     list_display = ['name','price','stock','category','show_image']
